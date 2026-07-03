@@ -1,0 +1,689 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+/* =========================================
+   FLUX — Design System Tokens
+   ========================================= */
+:root {
+  /* Brand Colors */
+  --flux-navy: #00286e;
+  --flux-navy-dark: #001a4a;
+  --flux-navy-light: #0d3a87;
+  --flux-blue: #1e88e5;
+  --flux-blue-light: #42a5f5;
+  --flux-teal: #18c5a9;
+  --flux-teal-light: #3dd6bb;
+
+  /* Neutral */
+  --flux-gray-50: #f8fafc;
+  --flux-gray-100: #f1f5f9;
+  --flux-gray-200: #e2e8f0;
+  --flux-gray-300: #cbd5e1;
+  --flux-gray-400: #94a3b8;
+  --flux-gray-500: #64748b;
+  --flux-gray-600: #475569;
+  --flux-gray-700: #334155;
+  --flux-gray-800: #1e293b;
+  --flux-gray-900: #0f172a;
+
+  /* State Colors */
+  --flux-success: #18c56a;
+  --flux-warning: #f59000;
+  --flux-danger: #ef4444;
+  --flux-info: #1088e5;
+
+  /* Backgrounds */
+  --flux-bg: #f0f4f9;
+  --flux-surface: #ffffff;
+  --flux-surface-2: #f8fafc;
+
+  /* Shadows */
+  --flux-shadow-sm: 0 1px 3px rgba(0, 40, 110, 0.08);
+  --flux-shadow: 0 4px 16px rgba(0, 40, 110, 0.1);
+  --flux-shadow-lg: 0 8px 32px rgba(0, 40, 110, 0.15);
+  --flux-shadow-card: 0 2px 8px rgba(0, 40, 110, 0.08);
+}
+
+@theme inline {
+  --color-background: var(--flux-bg);
+  --color-foreground: var(--flux-gray-900);
+  --font-sans: "Manrope", sans-serif;
+}
+
+/* =========================================
+   Base Styles
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--flux-bg);
+  color: var(--flux-gray-900);
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================
+   App Shell — Mobile First
+   ========================================= */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--flux-bg);
+  position: relative;
+}
+
+.app-screen {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 72px; /* reserva espaço para bottom nav */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.app-screen::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================
+   Bottom Navigation
+   ========================================= */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: var(--flux-surface);
+  border-top: 1px solid var(--flux-gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+  z-index: 50;
+  box-shadow: 0 -4px 20px rgba(0, 40, 110, 0.08);
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 52px;
+  text-decoration: none;
+}
+
+.bottom-nav-item span {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--flux-gray-400);
+  transition: color 0.2s ease;
+}
+
+.bottom-nav-item svg {
+  color: var(--flux-gray-400);
+  transition: color 0.2s ease;
+}
+
+.bottom-nav-item.active span,
+.bottom-nav-item.active svg {
+  color: var(--flux-blue);
+}
+
+.bottom-nav-item.active {
+  background: rgba(30, 136, 229, 0.08);
+}
+
+/* =========================================
+   Cards
+   ========================================= */
+.flux-card {
+  background: var(--flux-surface);
+  border-radius: 16px;
+  box-shadow: var(--flux-shadow-card);
+  border: 1px solid var(--flux-gray-100);
+}
+
+.flux-card-navy {
+  background: linear-gradient(135deg, var(--flux-navy) 0%, var(--flux-navy-light) 100%);
+  border-radius: 20px;
+  color: white;
+}
+
+/* =========================================
+   Status Badges
+   ========================================= */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: rgba(24, 197, 106, 0.12);
+  color: #0f9e56;
+}
+
+.badge-warning {
+  background: rgba(245, 144, 0, 0.12);
+  color: #c87300;
+}
+
+.badge-info {
+  background: rgba(30, 136, 229, 0.12);
+  color: #1565c0;
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.12);
+  color: #c62828;
+}
+
+.badge-teal {
+  background: rgba(24, 197, 169, 0.12);
+  color: #0e8a76;
+}
+
+.badge-gray {
+  background: rgba(100, 116, 139, 0.1);
+  color: var(--flux-gray-600);
+}
+
+/* =========================================
+   Buttons
+   ========================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: "Manrope", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--flux-blue);
+  color: white;
+  box-shadow: 0 4px 12px rgba(30, 136, 229, 0.35);
+}
+
+.btn-primary:hover {
+  background: #1565c0;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(30, 136, 229, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-navy {
+  background: var(--flux-navy);
+  color: white;
+}
+
+.btn-navy:hover {
+  background: var(--flux-navy-dark);
+}
+
+.btn-teal {
+  background: var(--flux-teal);
+  color: white;
+  box-shadow: 0 4px 12px rgba(24, 197, 169, 0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--flux-blue);
+  border: 1.5px solid var(--flux-blue);
+}
+
+.btn-ghost {
+  background: var(--flux-gray-100);
+  color: var(--flux-gray-700);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+/* =========================================
+   Inputs
+   ========================================= */
+.flux-input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--flux-gray-200);
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  color: var(--flux-gray-900);
+  background: var(--flux-surface);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.flux-input:focus {
+  border-color: var(--flux-blue);
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.12);
+}
+
+.flux-input::placeholder {
+  color: var(--flux-gray-400);
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--flux-gray-400);
+}
+
+.input-wrapper .flux-input {
+  padding-left: 42px;
+}
+
+/* =========================================
+   Search Bar
+   ========================================= */
+.search-bar {
+  background: var(--flux-gray-100);
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  padding: 10px 14px 10px 40px;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  width: 100%;
+  outline: none;
+  transition: all 0.2s ease;
+  color: var(--flux-gray-800);
+}
+
+.search-bar:focus {
+  background: var(--flux-surface);
+  border-color: var(--flux-blue);
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+}
+
+/* =========================================
+   Page Headers
+   ========================================= */
+.page-header {
+  background: white;
+  padding: 16px 20px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--flux-gray-100);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.page-header-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--flux-gray-900);
+}
+
+/* =========================================
+   Section Headers
+   ========================================= */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--flux-gray-900);
+}
+
+.section-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--flux-blue);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* =========================================
+   Product Card
+   ========================================= */
+.product-card {
+  background: var(--flux-surface);
+  border-radius: 14px;
+  border: 1px solid var(--flux-gray-100);
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  border-color: var(--flux-blue);
+  box-shadow: 0 4px 16px rgba(30, 136, 229, 0.12);
+}
+
+.product-card-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: var(--flux-gray-100);
+  object-fit: contain;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+/* =========================================
+   Order Card
+   ========================================= */
+.order-card {
+  background: var(--flux-surface);
+  border-radius: 14px;
+  border: 1px solid var(--flux-gray-100);
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.order-card:hover {
+  box-shadow: var(--flux-shadow);
+  border-color: var(--flux-gray-200);
+}
+
+/* =========================================
+   Quantity Control
+   ========================================= */
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--flux-gray-100);
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.qty-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  background: transparent;
+}
+
+.qty-btn:hover {
+  background: var(--flux-gray-200);
+}
+
+.qty-btn.primary {
+  background: var(--flux-blue);
+  color: white;
+}
+
+.qty-btn.primary:hover {
+  background: #1565c0;
+}
+
+.qty-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--flux-gray-900);
+  min-width: 24px;
+  text-align: center;
+}
+
+/* =========================================
+   Cart Badge
+   ========================================= */
+.cart-badge {
+  position: relative;
+}
+
+.cart-badge::after {
+  content: attr(data-count);
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: var(--flux-danger);
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+/* =========================================
+   Filter Pills
+   ========================================= */
+.filter-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.filter-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-pill {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1.5px solid var(--flux-gray-200);
+  background: var(--flux-surface);
+  color: var(--flux-gray-600);
+}
+
+.filter-pill.active {
+  background: var(--flux-navy);
+  color: white;
+  border-color: var(--flux-navy);
+}
+
+/* =========================================
+   Alert Card
+   ========================================= */
+.alert-card {
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.alert-card.warning {
+  background: rgba(245, 144, 0, 0.08);
+  border: 1px solid rgba(245, 144, 0, 0.2);
+}
+
+.alert-card.info {
+  background: rgba(30, 136, 229, 0.08);
+  border: 1px solid rgba(30, 136, 229, 0.2);
+}
+
+/* =========================================
+   Animations
+   ========================================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes checkDraw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Staggered animation delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* =========================================
+   Stat Cards
+   ========================================= */
+.stat-card {
+  background: var(--flux-surface);
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid var(--flux-gray-100);
+  box-shadow: var(--flux-shadow-sm);
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--flux-gray-500);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--flux-gray-900);
+  line-height: 1.2;
+}
+
+.stat-delta {
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.stat-delta.positive {
+  color: var(--flux-success);
+}
+
+.stat-delta.negative {
+  color: var(--flux-danger);
+}
+
+/* =========================================
+   Divider
+   ========================================= */
+.flux-divider {
+  height: 1px;
+  background: var(--flux-gray-100);
+  margin: 0;
+}
+
+/* =========================================
+   Login page full-screen
+   ========================================= */
+.login-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, var(--flux-navy) 0%, var(--flux-navy-light) 55%, #1a4a9e 100%);
+}
