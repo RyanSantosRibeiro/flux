@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
    Login Page — tela de autenticação do vendedor (mobile-first)
    ============================================================ */
 
-export default function LoginPage() {
+export default function LoginPage() { 
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
